@@ -1,0 +1,16 @@
+header {
+    height: var(--header-height);
+    color: var(--header-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+header > h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    user-select: none;
+}
+

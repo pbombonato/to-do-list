@@ -1,0 +1,20 @@
+Issues
+    Implementar drag & drop para reordenar tasks existentes
+    Inserir redes sociais no footer (Testar estilo em mobile e web)
+    Refatorar e componentizar TaskCrud
+        Componentes:
+            TitleMaker
+            Table
+            Row
+            FirstRow
+    Verificar funcionamento JSON server online
+    Escrever Readme
+    Publicar no GITHub usando Git
+    Fazer deploy no Netlify ou Heroku para aprender a usá-los
+
+
+Outros recursos
+- Categorias
+- Listas
+- Prazo/data
+- Calendário
