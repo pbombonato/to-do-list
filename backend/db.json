@@ -1,29 +1,32 @@
 {
   "tasks": [
     {
-      "title": "Ipsum",
-      "isChecked": false,
-      "id": 2
-    },
-    {
-      "title": "Dolor",
-      "isChecked": false,
-      "id": 3
-    },
-    {
-      "title": "Sit",
-      "isChecked": false,
-      "id": 4
-    },
-    {
-      "title": "Consectetur",
-      "isChecked": false,
-      "id": 6
-    },
-    {
-      "title": "Lorem",
+      "title": "Lavar louças",
       "isChecked": true,
       "id": 7
+    },
+    {
+      "title": "Fazer almoço",
+      "isChecked": true,
+      "id": 8
+    },
+    {
+      "title": "Lavar roupas",
+      "isChecked": false,
+      "showInput": false,
+      "id": 9
+    },
+    {
+      "title": "Ler os e-mails",
+      "isChecked": false,
+      "showInput": false,
+      "id": 10
+    },
+    {
+      "title": "Passear com o cachorro",
+      "isChecked": false,
+      "showInput": false,
+      "id": 11
     }
   ]
 }
