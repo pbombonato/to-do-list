@@ -1,28 +1,25 @@
 {
   "tasks": [
     {
-      "title": "Ler os e-mails",
+      "title": "Passear com o cachorro",
       "isChecked": false,
-      "id": 10
-    },
-    {
-      "title": "Passear com o cachorros",
-      "isChecked": false,
+      "showInput": false,
       "id": 11
     },
     {
-      "title": "sdasdas",
+      "title": "Lavar roupas",
       "isChecked": true,
+      "showInput": false,
       "id": 12
     },
     {
-      "title": "dsdass",
+      "title": "Lavar louças",
       "isChecked": false,
       "showInput": false,
       "id": 13
     },
     {
-      "title": "sdasd",
+      "title": "Tirar o lixo",
       "isChecked": false,
       "showInput": false,
       "id": 14

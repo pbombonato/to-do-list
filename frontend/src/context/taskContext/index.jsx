@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useCallback, useReducer } from "react";
 import { initialState } from "./data";
 import { reducer } from "./reducer";
 import { actions } from "./actions";
@@ -31,9 +31,17 @@ export const TaskContext = ({ children }) => {
   function updateNewTaskTitle(payload) {
     dispatch({ type: actions.UPDATE_NEW_TASK_TITLE, payload });
   }
+
   function updateTaskTitle(payload) {
     dispatch({ type: actions.UPDATE_TASK_TITLE, payload });
   }
+
+  const updateTaskList = useCallback(
+    (payload) => {
+      dispatch({ type: "UPDATE_TASK_LIST", payload });
+    },
+    [dispatch]
+  );
 
   return (
     <Context.Provider
@@ -46,6 +54,7 @@ export const TaskContext = ({ children }) => {
         clearOldTask,
         updateNewTaskTitle,
         updateTaskTitle,
+        updateTaskList,
       }}
     >
       {children}

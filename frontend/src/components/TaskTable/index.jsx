@@ -1,6 +1,6 @@
 import "./TaskTable.css";
 
-import React, { Component } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,51 +12,29 @@ import Checkbox from "../Checkbox";
 import TrashButton from "../TrashButton";
 
 import * as Constants from "../../constants";
-import { TaskContext } from "../../context/taskContext";
+import { Context } from "../../context/taskContext";
 
-export default class TaskTable extends Component {
-  state = { ...Constants.initialState };
+export default function TaskTable() {
+  const {
+    state,
+    addTask,
+    updateTask,
+    removeTask,
+    clearTask,
+    clearOldTask,
+    updateNewTaskTitle,
+    updateTaskTitle,
+    updateTaskList,
+  } = useContext(Context);
 
-  addTask(task) {
-    const oldList = JSON.parse(JSON.stringify(this.state.list));
-    const taskExists = oldList.some((t) => t.id === task.id);
-
-    if (taskExists) {
-      this.setState({ list: oldList });
-    } else {
-      const list = [task, ...oldList];
-      this.setState({ list });
-    }
-  }
-
-  updateTask(task) {
-    const oldList = JSON.parse(JSON.stringify(this.state.list));
-    const taskElement = oldList.find((t) => t.id === task.id);
-
-    if (!taskElement) {
-      this.setState({ list: oldList });
-    } else {
-      const list = oldList.map((t) => (t.id === task.id ? task : t));
-      this.setState({ list });
-    }
-  }
-
-  removeTask(task) {
-    const oldList = JSON.parse(JSON.stringify(this.state.list));
-    const list = oldList.filter((t) => t.id !== task.id);
-    this.setState({ list });
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     axios(Constants.baseUrl).then((resp) => {
-      this.setState({ list: resp.data });
+      updateTaskList(resp.data);
     });
-  }
+  }, [updateTaskList]);
 
-  save(taskDB) {
-    const task = taskDB.showInput
-      ? { ...this.state.oldTask }
-      : { ...this.state.task };
+  function save(taskDB) {
+    const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
 
     task.isChecked = taskDB.isChecked;
 
@@ -68,68 +46,32 @@ export default class TaskTable extends Component {
 
     axios[method](url, task).then((resp) => {
       if (taskDB.showInput) {
-        this.updateTask(resp.data);
-        this.setState({ oldTask: Constants.initialState.oldTask });
+        updateTask(resp.data);
+        clearOldTask();
       } else {
-        this.addTask(resp.data);
-        this.setState({ task: Constants.initialState.task });
+        addTask(resp.data);
+        clearTask();
       }
     });
   }
 
-  toggleCheck(task) {
+  function toggleCheck(task) {
     axios
       .put(Constants.baseUrl + "/" + task.id, {
         title: task.title,
         isChecked: !task.isChecked,
       })
       .then((resp) => {
-        this.updateTask(resp.data);
+        updateTask(resp.data);
       });
   }
 
-  getUpdatedList(task, add = true) {
-    const oldList = JSON.parse(JSON.stringify(this.state.list));
-    const taskElement = oldList.filter((t) => t.id === task.id)[0];
-    const taskIndex = oldList.indexOf(taskElement);
-
-    const list = this.state.list.filter((t) => t.id !== task.id);
-
-    if (add) {
-      if (taskElement) {
-        oldList[taskIndex] = task;
-        this.setState({ list: oldList }); //
-      } else {
-        list.unshift(task);
-        this.setState({ list }); //
-      }
-    } else {
-      this.setState({ list }); //
-    }
-  }
-
-  newTitle(event) {
-    const task = { ...this.state.task };
-
-    task.title = event.target.value;
-
-    this.setState({ task }); //
-  }
-
-  updateTitle(event) {
-    const task = { ...this.state.oldTask };
-
-    task.title = event.target.value;
-
-    this.setState({ oldTask: task }); //
-  }
-
-  saveOnEnter(event, task) {
+  function saveOnEnter(event, task) {
     const enterKeyCode = 13;
-    if (event.keyCode === enterKeyCode) this.save(task);
+    if (event.keyCode === enterKeyCode) save(task);
   }
 
-  controlInput(task, showInput = false) {
+  function controlInput(task, showInput = false) {
     axios
       .put(Constants.baseUrl + "/" + task.id, {
         title: task.title,
@@ -137,64 +79,64 @@ export default class TaskTable extends Component {
         showInput: showInput,
       })
       .then((resp) => {
-        this.updateTask(resp.data);
+        updateTask(resp.data);
       });
   }
 
-  remove(task) {
+  function remove(task) {
     axios.delete(`${Constants.baseUrl}/${task.id}`).then((resp) => {
-      this.removeTask(task);
+      removeTask(task);
     });
   }
 
-  renderRows() {
-    return this.state.list
+  function renderRows() {
+    return state.list
       .filter((task) => !task.isChecked)
       .map((task) => {
         return (
           <div className="div-row" key={task.id}>
-            <Checkbox task={task} handleChange={() => this.toggleCheck(task)} />
+            <Checkbox task={task} handleChange={() => toggleCheck(task)} />
 
             <TaskTitle
               value={task.title}
               showInput={task.showInput}
-              handleChange={(e) => this.updateTitle(e)}
-              handleBlur={() => this.controlInput(task, false)}
-              handleDoubleClick={() => this.controlInput(task, true)}
-              handleKeyDown={(e) => this.saveOnEnter(e, task)}
+              handleChange={(e) => updateTaskTitle(e.target.value)}
+              handleBlur={() => controlInput(task, false)}
+              handleDoubleClick={() => controlInput(task, true)}
+              handleKeyDown={(e) => saveOnEnter(e, task)}
             />
 
-            <TrashButton handleClick={() => this.remove(task)} />
+            <TrashButton handleClick={() => remove(task)} />
           </div>
         );
       });
   }
 
-  renderCompleteRows() {
-    return this.state.list
+  function renderCompleteRows() {
+    return state.list
       .filter((task) => task.isChecked)
       .map((task) => {
         return (
           <div className="div-row" key={task.id}>
-            <Checkbox task={task} handleChange={() => this.toggleCheck(task)} />
+            <Checkbox task={task} handleChange={() => toggleCheck(task)} />
 
             <TaskTitle
               value={task.title}
               showInput={task.showInput}
-              handleChange={(e) => this.updateTitle(e)}
-              handleBlur={() => this.controlInput(task, false)}
-              handleDoubleClick={() => this.controlInput(task, true)}
-              handleKeyDown={(e) => this.saveOnEnter(e, task)}
+              handleChange={(e) => updateTaskTitle(e.target.value)}
+              handleBlur={() => controlInput(task, false)}
+              handleDoubleClick={() => controlInput(task, true)}
+              handleKeyDown={(e) => saveOnEnter(e, task)}
               complete
             />
 
-            <TrashButton handleClick={() => this.remove(task)} />
+            <TrashButton handleClick={() => remove(task)} />
           </div>
         );
       });
   }
 
-  firstRow() {
+  function firstRow() {
     return (
       <div className="div-row" id="first-row">
         <div className="div-title">
@@ -202,16 +144,16 @@ export default class TaskTable extends Component {
             className="input-text"
             type="text"
             name="title"
-            value={this.state.task.title}
-            onChange={(e) => this.newTitle(e)}
+            value={state.task.title}
+            onChange={(e) => updateNewTaskTitle(e.target.value)}
             placeholder="New task"
-            onKeyDownCapture={(e) => this.saveOnEnter(e, this.state.task)}
+            onKeyDownCapture={(e) => saveOnEnter(e, state.task)}
             autoFocus
           />
         </div>
 
         <div className="div-btns">
-          <button className="btn" onClick={(e) => this.save(this.state.task)}>
+          <button className="btn" onClick={(e) => save(state.task)}>
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
@@ -219,21 +161,15 @@ export default class TaskTable extends Component {
     );
   }
 
-  renderTable() {
+  function renderTable() {
     return (
       <div className="div-table">
-        {this.firstRow()}
-        {this.renderRows()}
-        {this.renderCompleteRows()}
+        {firstRow()}
+        {renderRows()}
+        {renderCompleteRows()}
       </div>
     );
   }
 
-  render() {
-    return (
-      <TaskContext>
-        <Main>{this.renderTable()}</Main>
-      </TaskContext>
-    );
-  }
+  return <Main>{renderTable()}</Main>;
 }

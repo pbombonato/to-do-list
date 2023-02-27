@@ -20,6 +20,8 @@ export const reducer = (state, action) => {
         list: state.list.filter((task) => task.id !== action.payload.id),
       };
 
+
+
     case "CLEAR_TASK": {
       return { ...state, task: initialState.task };
     }
@@ -31,6 +33,9 @@ export const reducer = (state, action) => {
     }
     case "UPDATE_TASK_TITLE": {
       return { ...state, oldTask: { ...state.oldTask, title: action.payload } };
+    }
+    case "UPDATE_TASK_LIST": {
+      return { ...state, list: action.payload }
     }
     default:
       return state;
