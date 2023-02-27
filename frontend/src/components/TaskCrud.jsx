@@ -10,7 +10,7 @@ import TaskTitle from "./TaskTitle";
 import Checkbox from "./Checkbox";
 import TrashButton from "./TrashButton";
 
-import * as Constants from "../../constants";
+import * as Constants from "../constants";
 import TaskUtils from "./helpers";
 
 export default class TaskCrud extends Component {

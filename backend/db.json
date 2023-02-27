@@ -2,12 +2,12 @@
   "tasks": [
     {
       "title": "Lavar louças",
-      "isChecked": true,
+      "isChecked": false,
       "id": 7
     },
     {
       "title": "Fazer almoço",
-      "isChecked": true,
+      "isChecked": false,
       "id": 8
     },
     {
@@ -18,14 +18,12 @@
     },
     {
       "title": "Ler os e-mails",
-      "isChecked": false,
-      "showInput": false,
+      "isChecked": true,
       "id": 10
     },
     {
       "title": "Passear com o cachorro",
       "isChecked": false,
-      "showInput": false,
       "id": 11
     }
   ]

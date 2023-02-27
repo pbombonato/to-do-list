@@ -5,11 +5,16 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 0;
 }
 
 header > h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 700;
   user-select: none;
+}
+
+@media screen and (width < 800px) {
+  header > h1 {
+    font-size: 2.5rem;
+  }
 }

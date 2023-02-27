@@ -1,12 +1,6 @@
-// const methodsConfig = {
-//     state,
-//     setState,
-// getUpdatedList,
-// save
-// }
 import axios from "axios";
-import * as Utils from "../../../utils";
-import * as Constants from "../../../constants";
+import * as Utils from "../../utils";
+import * as Constants from "../../constants";
 
 function getUpdatedList(task, config, add = true) {
   const oldList = Utils.cloneArray(config.list);
@@ -115,7 +109,7 @@ function removeTask(task, config) {
   });
 }
 
-export {
+const TaskUtils ={
   save,
   getUpdatedList,
   saveOnEnter,
@@ -125,3 +119,5 @@ export {
   controlInput,
   removeTask,
 };
+
+export default TaskUtils

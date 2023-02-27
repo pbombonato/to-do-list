@@ -1,9 +1,9 @@
 import React from "react";
 import "./Main.css";
 
-const Main = (props) => (
+const Main = ({ children }) => (
   <main className="content">
-    <div>{props.children}</div>
+    <div>{children}</div>
   </main>
 );
 

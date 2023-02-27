@@ -3,9 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 
-import Header from "../components/templates/Header";
-import TaskCrud from "../components/tasks/TaskCrud";
-import Footer from "../components/templates/Footer";
+import Header from "../templates/Header";
+import TaskCrud from "../components/TaskCrud";
+import Footer from "../templates/Footer";
 
 const App = () => (
   <div className="app">
