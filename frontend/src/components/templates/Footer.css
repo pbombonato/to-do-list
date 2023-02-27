@@ -1,11 +1,11 @@
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
 }
 
 footer > span {
-    color: var(--footer-color);
-    user-select: none;
+  color: var(--footer-color);
+  user-select: none;
 }

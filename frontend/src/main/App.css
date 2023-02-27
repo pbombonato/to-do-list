@@ -1,55 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
 
 :root {
-    --header-height: 120px;
-    --footer-height: 70px;
+  --header-height: 120px;
+  --footer-height: 70px;
 
-    --header-color: #71738C;
-    --footer-color: var(--header-color);
-    --bg-color: ##F8F8FF;
-    --table-bg-color: #ecedf6;
-    --tr-bg-color: #fff;
-    --checkbox-hover-bg-color: #d1d3e0;
-    --checkbox-checked-hover-color: #8b94f4;
-    --checkbox-checked-bg-color: #646FF0;
-    --checkbox-checkmark-color: #fff;
+  --header-color: #71738c;
+  --footer-color: var(--header-color);
+  --bg-color: ##f8f8ff;
+  --table-bg-color: #ecedf6;
+  --tr-bg-color: #fff;
+  --checkbox-hover-bg-color: #d1d3e0;
+  --checkbox-checked-hover-color: #8b94f4;
+  --checkbox-checked-bg-color: #646ff0;
+  --checkbox-checkmark-color: #fff;
 }
 
 * {
-    box-sizing: border-box;
-    font-family: 'Courier Prime', monospace;
+  box-sizing: border-box;
+  font-family: "Courier Prime", monospace;
 }
 
 .app {
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
 
-    overflow-y: visible;
-    overflow-x: hidden;
+  overflow-y: visible;
+  overflow-x: hidden;
 
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 
-        var(--header-height) 
-        1fr 
-        var(--footer-height);
-    grid-template-areas: 
-        "header"
-        "content"
-        "footer";
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    var(--header-height)
+    1fr
+    var(--footer-height);
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
 }
 
 header.header {
-    grid-area: header;
+  grid-area: header;
 }
 
 main.content {
-    grid-area: content;
+  grid-area: content;
 }
 
 footer.footer {
-    grid-area: footer;
+  grid-area: footer;
 }

@@ -1,3 +1,3 @@
-import * as TaskUtils from './TaskUtils'
+import * as TaskUtils from "./TaskUtils";
 
-export default TaskUtils
+export default TaskUtils;
