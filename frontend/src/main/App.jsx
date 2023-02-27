@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import Header from "../templates/Header";
-import TaskCrud from "../components/TaskCrud";
+import TaskCrud from "../components/TaskTable";
 import Footer from "../templates/Footer";
 
 const App = () => (

@@ -1,10 +1,11 @@
+import "./TaskTable.css";
+
 import React, { Component } from "react";
 import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import "./TaskCrud.css";
 import Main from "../templates/Main";
 import TaskTitle from "./TaskTitle";
 import Checkbox from "./Checkbox";
@@ -12,6 +13,7 @@ import TrashButton from "./TrashButton";
 
 import * as Constants from "../constants";
 import TaskUtils from "./helpers";
+import { TaskContext } from "../context/taskContext";
 
 export default class TaskCrud extends Component {
   state = { ...Constants.initialState };
@@ -134,11 +136,6 @@ export default class TaskCrud extends Component {
         return (
           <div className="div-row" key={task.id}>
             <Checkbox task={task} handleChange={() => this.toggleCheck(task)} />
-            {/* STILL NOT WORKING */}
-            {/* <Checkbox
-                            task={task}
-                            updateList={this.updateList}
-                        />  */}
 
             <TaskTitle
               value={task.title}
@@ -215,6 +212,11 @@ export default class TaskCrud extends Component {
   }
 
   render() {
-    return <Main>{this.renderTable()}</Main>;
+    return (
+    <TaskContext>
+      <Main>{this.renderTable()}</Main>
+    </TaskContext>
+    )
+    ;
   }
 }
