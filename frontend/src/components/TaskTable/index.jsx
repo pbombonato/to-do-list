@@ -12,19 +12,40 @@ import Checkbox from "../Checkbox";
 import TrashButton from "../TrashButton";
 
 import * as Constants from "../../constants";
-import TaskUtils from "../helpers";
 import { TaskContext } from "../../context/taskContext";
 
-export default class TaskCrud extends Component {
+export default class TaskTable extends Component {
   state = { ...Constants.initialState };
 
-  UtilsConfig = {
-    list: this.state.list,
-    state: this.state,
-    setState: (obj) => this.setState(obj),
-    getUpdatedList: (...params) => TaskUtils.getUpdatedList(...params),
-    save: (...params) => TaskUtils.save(...params),
-  };
+  addTask(task) {
+    const oldList = JSON.parse(JSON.stringify(this.state.list));
+    const taskExists = oldList.some((t) => t.id === task.id);
+
+    if (taskExists) {
+      this.setState({ list: oldList });
+    } else {
+      const list = [task, ...oldList];
+      this.setState({ list });
+    }
+  }
+
+  updateTask(task) {
+    const oldList = JSON.parse(JSON.stringify(this.state.list));
+    const taskElement = oldList.find((t) => t.id === task.id);
+
+    if (!taskElement) {
+      this.setState({ list: oldList });
+    } else {
+      const list = oldList.map((t) => (t.id === task.id ? task : t));
+      this.setState({ list });
+    }
+  }
+
+  removeTask(task) {
+    const oldList = JSON.parse(JSON.stringify(this.state.list));
+    const list = oldList.filter((t) => t.id !== task.id);
+    this.setState({ list });
+  }
 
   componentDidMount() {
     axios(Constants.baseUrl).then((resp) => {
@@ -36,18 +57,23 @@ export default class TaskCrud extends Component {
     const task = taskDB.showInput
       ? { ...this.state.oldTask }
       : { ...this.state.task };
+
     task.isChecked = taskDB.isChecked;
 
     const method = taskDB.id ? "put" : "post";
+
     const url = taskDB.id
       ? `${Constants.baseUrl}/${taskDB.id}`
       : Constants.baseUrl;
 
     axios[method](url, task).then((resp) => {
-      const list = this.getUpdatedList(resp.data);
-      taskDB.showInput
-        ? this.setState({ oldTask: Constants.initialState.oldTask, list })
-        : this.setState({ task: Constants.initialState.task, list });
+      if (taskDB.showInput) {
+        this.updateTask(resp.data);
+        this.setState({ oldTask: Constants.initialState.oldTask });
+      } else {
+        this.addTask(resp.data);
+        this.setState({ task: Constants.initialState.task });
+      }
     });
   }
 
@@ -58,8 +84,7 @@ export default class TaskCrud extends Component {
         isChecked: !task.isChecked,
       })
       .then((resp) => {
-        const list = this.getUpdatedList(resp.data);
-        this.setState({ list });
+        this.updateTask(resp.data);
       });
   }
 
@@ -73,19 +98,14 @@ export default class TaskCrud extends Component {
     if (add) {
       if (taskElement) {
         oldList[taskIndex] = task;
-        return oldList;
+        this.setState({ list: oldList }); //
       } else {
         list.unshift(task);
-        return list;
+        this.setState({ list }); //
       }
     } else {
-      return list;
+      this.setState({ list }); //
     }
-  }
-
-  updateList(task, add = true) {
-    const list = this.getUpdatedList(task, add);
-    this.setState({ list });
   }
 
   newTitle(event) {
@@ -93,7 +113,7 @@ export default class TaskCrud extends Component {
 
     task.title = event.target.value;
 
-    this.setState({ task });
+    this.setState({ task }); //
   }
 
   updateTitle(event) {
@@ -101,7 +121,7 @@ export default class TaskCrud extends Component {
 
     task.title = event.target.value;
 
-    this.setState({ oldTask: task });
+    this.setState({ oldTask: task }); //
   }
 
   saveOnEnter(event, task) {
@@ -117,15 +137,13 @@ export default class TaskCrud extends Component {
         showInput: showInput,
       })
       .then((resp) => {
-        const list = this.getUpdatedList(resp.data);
-        this.setState({ list });
+        this.updateTask(resp.data);
       });
   }
 
   remove(task) {
     axios.delete(`${Constants.baseUrl}/${task.id}`).then((resp) => {
-      const list = this.getUpdatedList(task, false);
-      this.setState({ list });
+      this.removeTask(task);
     });
   }
 
@@ -213,10 +231,9 @@ export default class TaskCrud extends Component {
 
   render() {
     return (
-    <TaskContext>
-      <Main>{this.renderTable()}</Main>
-    </TaskContext>
-    )
-    ;
+      <TaskContext>
+        <Main>{this.renderTable()}</Main>
+      </TaskContext>
+    );
   }
 }
