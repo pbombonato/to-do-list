@@ -26,12 +26,6 @@ div.div-row {
   padding: 10px;
 }
 
-div#first-row {
-  padding-left: 1rem;
-  grid-template-areas: "title btns";
-  grid-template-columns: 1fr 10vw;
-}
-
 /* Checkbox */
 
 .div-checkbox {
@@ -120,15 +114,11 @@ div.div-title {
 
 /* Input title */
 
-input[type="text"] {
+/* input[type="text"] {
   width: 100%;
   border: none;
   outline: none;
-}
-
-input.input-text::placeholder {
-  color: var(--checkbox-hover-bg-color);
-}
+} */
 
 /* Buttons */
 
@@ -152,10 +142,5 @@ div.div-btns {
     grid-template-columns: 5vw 1fr 5vw;
     grid-template-areas: "checkbox title btns";
     margin: 1rem 0;
-  }
-
-  div#first-row {
-    grid-template-columns: 1fr 5vw;
-    grid-template-areas: "title btns";
   }
 }

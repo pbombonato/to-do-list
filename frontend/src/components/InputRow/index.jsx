@@ -1,3 +1,5 @@
+import './InputRow.module.css'
+
 import { useContext } from "react";
 
 import { Context } from "../../context/taskContext";
@@ -12,7 +14,7 @@ export default function InputRow() {
   const { state, updateNewTaskTitle } = useContext(Context);
 
   return (
-    <div className="div-row" id="first-row">
+    <div className="div-row" id="input-row">
       <div className="div-title">
         <input
           className="input-text"
