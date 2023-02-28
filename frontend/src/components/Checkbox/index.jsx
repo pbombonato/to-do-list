@@ -1,3 +1,5 @@
+import styles from "./Checkbox.module.css"
+
 import axios from "axios";
 import { useContext } from "react";
 import { baseUrl } from "../../constants";
@@ -18,7 +20,7 @@ function Checkbox({ task }) {
   }
 
   return (
-    <div className="div-checkbox">
+    <div className={styles['div-checkbox']}>
       <input
         type="checkbox"
         name={task.id}
@@ -26,7 +28,7 @@ function Checkbox({ task }) {
         defaultChecked={task.isChecked}
         onChange={() => toggleCheck(task)}
       />
-      <label htmlFor={`checkbox-${task.id}`} className="checkmark" />
+      <label htmlFor={`checkbox-${task.id}`} className={styles.checkmark} />
     </div>
   );
 }
