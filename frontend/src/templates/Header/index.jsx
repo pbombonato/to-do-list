@@ -1,8 +1,8 @@
 import React from "react";
-import "./Header.module.css";
+import styles from "./Header.module.css";
 
-const Header = (props) => (
-  <header className="header">
+const Header = () => (
+  <header className={styles.header}>
     <h1>to-do list</h1>
   </header>
 );
