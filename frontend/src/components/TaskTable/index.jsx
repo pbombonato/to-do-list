@@ -73,11 +73,9 @@ export default function TaskTable() {
           <div className="div-row" key={task.id}>
             <Checkbox task={task} />
 
-            <TaskTitle
-              task={task}
-            />
+            <TaskTitle task={task} />
 
-            <TrashButton handleClick={() => remove(task)} />
+            <TrashButton task={task} />
           </div>
         );
       });
@@ -91,12 +89,9 @@ export default function TaskTable() {
           <div className="div-row" key={task.id}>
             <Checkbox task={task} />
 
-            <TaskTitle
-              task={task}
-              complete
-            />
+            <TaskTitle task={task} complete />
 
-            <TrashButton handleClick={() => remove(task)} />
+            <TrashButton task={task} />
           </div>
         );
       });
