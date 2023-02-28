@@ -7,19 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import Main from "../../templates/Main";
-import TaskTitle from "../TaskTitle";
-import Checkbox from "../Checkbox";
-import TrashButton from "../TrashButton";
 
-import * as Constants from "../../constants";
+import { baseUrl } from "../../constants";
 import { Context } from "../../context/taskContext";
+import TaskRow from "../TaskRow";
 
 export default function TaskTable() {
   const {
     state,
     addTask,
     updateTask,
-    removeTask,
     clearTask,
     clearOldTask,
     updateNewTaskTitle,
@@ -27,7 +24,7 @@ export default function TaskTable() {
   } = useContext(Context);
 
   useEffect(() => {
-    axios(Constants.baseUrl).then((resp) => {
+    axios(baseUrl).then((resp) => {
       updateTaskList(resp.data);
     });
   }, [updateTaskList]);
@@ -40,8 +37,8 @@ export default function TaskTable() {
     const method = taskDB.id ? "put" : "post";
 
     const url = taskDB.id
-      ? `${Constants.baseUrl}/${taskDB.id}`
-      : Constants.baseUrl;
+      ? `${baseUrl}/${taskDB.id}`
+      : baseUrl;
 
     axios[method](url, task).then((resp) => {
       if (taskDB.showInput) {
@@ -59,42 +56,16 @@ export default function TaskTable() {
     if (event.keyCode === enterKeyCode) save(task);
   }
 
-  function remove(task) {
-    axios.delete(`${Constants.baseUrl}/${task.id}`).then((resp) => {
-      removeTask(task);
-    });
-  }
-
   function renderRows() {
     return state.list
       .filter((task) => !task.isChecked)
-      .map((task) => {
-        return (
-          <div className="div-row" key={task.id}>
-            <Checkbox task={task} />
-
-            <TaskTitle task={task} />
-
-            <TrashButton task={task} />
-          </div>
-        );
-      });
+      .map((task) => <TaskRow task={task} key={task.id} />);
   }
 
   function renderCompleteRows() {
     return state.list
       .filter((task) => task.isChecked)
-      .map((task) => {
-        return (
-          <div className="div-row" key={task.id}>
-            <Checkbox task={task} />
-
-            <TaskTitle task={task} complete />
-
-            <TrashButton task={task} />
-          </div>
-        );
-      });
+      .map((task) => <TaskRow task={task} key={task.id} />);
   }
 
   function firstRow() {
