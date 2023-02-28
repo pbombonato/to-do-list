@@ -3,6 +3,7 @@
     {
       "title": "Lavar roupas",
       "isChecked": false,
+      "showInput": false,
       "id": 12
     },
     {
