@@ -1,16 +1,32 @@
-import React from "react";
+import axios from "axios";
+import { useContext } from "react";
+import { baseUrl } from "../../constants";
+import { Context } from "../../context/taskContext";
 
-function Checkbox(props) {
+function Checkbox({ task }) {
+  const { updateTask } = useContext(Context);
+
+  function toggleCheck(task) {
+    axios
+      .put(baseUrl + "/" + task.id, {
+        title: task.title,
+        isChecked: !task.isChecked,
+      })
+      .then((resp) => {
+        updateTask(resp.data);
+      });
+  }
+
   return (
     <div className="div-checkbox">
       <input
         type="checkbox"
-        name={props.task.id}
-        id={`checkbox-${props.task.id}`}
-        defaultChecked={props.task.isChecked}
-        onChange={props.handleChange}
+        name={task.id}
+        id={`checkbox-${task.id}`}
+        defaultChecked={task.isChecked}
+        onChange={() => toggleCheck(task)}
       />
-      <label htmlFor={`checkbox-${props.task.id}`} className="checkmark" />
+      <label htmlFor={`checkbox-${task.id}`} className="checkmark" />
     </div>
   );
 }

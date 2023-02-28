@@ -55,17 +55,6 @@ export default function TaskTable() {
     });
   }
 
-  function toggleCheck(task) {
-    axios
-      .put(Constants.baseUrl + "/" + task.id, {
-        title: task.title,
-        isChecked: !task.isChecked,
-      })
-      .then((resp) => {
-        updateTask(resp.data);
-      });
-  }
-
   function saveOnEnter(event, task) {
     const enterKeyCode = 13;
     if (event.keyCode === enterKeyCode) save(task);
@@ -95,7 +84,7 @@ export default function TaskTable() {
       .map((task) => {
         return (
           <div className="div-row" key={task.id}>
-            <Checkbox task={task} handleChange={() => toggleCheck(task)} />
+            <Checkbox task={task} />
 
             <TaskTitle
               value={task.title}
@@ -118,7 +107,7 @@ export default function TaskTable() {
       .map((task) => {
         return (
           <div className="div-row" key={task.id}>
-            <Checkbox task={task} handleChange={() => toggleCheck(task)} />
+            <Checkbox task={task} />
 
             <TaskTitle
               value={task.title}

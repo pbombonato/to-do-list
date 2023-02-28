@@ -3,25 +3,21 @@
     {
       "title": "Passear com o cachorro",
       "isChecked": false,
-      "showInput": false,
       "id": 11
     },
     {
       "title": "Lavar roupas",
-      "isChecked": true,
-      "showInput": false,
+      "isChecked": false,
       "id": 12
     },
     {
       "title": "Lavar louças",
       "isChecked": false,
-      "showInput": false,
       "id": 13
     },
     {
       "title": "Tirar o lixo",
       "isChecked": false,
-      "showInput": false,
       "id": 14
     }
   ]
