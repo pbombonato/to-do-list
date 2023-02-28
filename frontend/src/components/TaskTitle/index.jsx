@@ -1,3 +1,5 @@
+import styles from "./TaskTitle.module.css";
+
 import { useContext } from "react";
 import axios from "axios";
 
@@ -6,9 +8,9 @@ import useTaskFunctions from "../../hooks/useTaskFunctions";
 import { Context } from "../../context/taskContext";
 import { baseUrl } from "../../constants";
 
-function TaskTitle({ task, complete }) {
+function TaskTitle({ task }) {
   const { saveOnEnter } = useTaskFunctions();
-  const { updateTask, updateTaskTitle } = useContext(Context)
+  const { updateTask, updateTaskTitle } = useContext(Context);
 
   function controlInput(task, showInput = false) {
     axios
@@ -23,7 +25,7 @@ function TaskTitle({ task, complete }) {
   }
 
   return (
-    <div className="div-title">
+    <div className={styles["div-title"]}>
       {task.showInput ? (
         <input
           type="text"
@@ -35,7 +37,7 @@ function TaskTitle({ task, complete }) {
       ) : (
         <span
           onDoubleClick={() => controlInput(task, true)}
-          className={complete ? "complete" : ""}
+          className={task.isChecked ? styles.complete : ""}
         >
           {task.title}
         </span>

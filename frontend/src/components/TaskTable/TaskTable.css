@@ -11,18 +11,6 @@ div.div-table {
   align-items: center;
 }
 
-/* Title */
-div.div-title {
-  grid-area: title;
-  overflow: hidden;
-  overflow-wrap: break-word;
-}
-
-.complete {
-  color: var(--checkbox-hover-bg-color);
-  text-decoration: line-through;
-}
-
 @media only screen and (min-width: 768px) {
   div.div-table {
     padding: 1rem 2rem;
