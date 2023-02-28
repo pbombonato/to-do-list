@@ -1,4 +1,4 @@
-main.content {
+.content {
   height: 100%;
   width: 100vw;
 
@@ -7,8 +7,4 @@ main.content {
   justify-content: flex-start;
 
   padding: 0 4vw;
-}
-
-table.table {
-  grid-area: table;
 }
