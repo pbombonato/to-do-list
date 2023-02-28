@@ -1,8 +1,7 @@
-import React from "react";
-import "./Footer.module.css";
+import styles from "./Footer.module.css";
 
-const Footer = (props) => (
-  <footer className="footer">
+const Footer = () => (
+  <footer className={styles.footer}>
     <span>
       Developed by <strong>Pablo Bombonato</strong>.
     </span>
