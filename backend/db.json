@@ -3,6 +3,7 @@
     {
       "title": "Passear com o cachorro",
       "isChecked": false,
+      "showInput": false,
       "id": 11
     },
     {

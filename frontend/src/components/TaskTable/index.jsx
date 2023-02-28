@@ -23,7 +23,6 @@ export default function TaskTable() {
     clearTask,
     clearOldTask,
     updateNewTaskTitle,
-    updateTaskTitle,
     updateTaskList,
   } = useContext(Context);
 
@@ -33,14 +32,6 @@ export default function TaskTable() {
     });
   }, [updateTaskList]);
 
-  function createOrUpdateTaskOnDb(task, method) {
-    const url = method === "put"
-      ? `${Constants.baseUrl}/${task.id}`
-      : Constants.baseUrl;
-
-    return axios[method](url, task);
-  }
-
   function save(taskDB) {
     const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
 
@@ -48,33 +39,24 @@ export default function TaskTable() {
 
     const method = taskDB.id ? "put" : "post";
 
-    createOrUpdateTaskOnDb(task, method)
-      .then((resp) => {
-        if (taskDB.showInput) {
-          updateTask(resp.data);
-          clearOldTask();
-        } else {
-          addTask(resp.data);
-          clearTask();
-        }
-      });
+    const url = taskDB.id
+      ? `${Constants.baseUrl}/${taskDB.id}`
+      : Constants.baseUrl;
+
+    axios[method](url, task).then((resp) => {
+      if (taskDB.showInput) {
+        updateTask(resp.data);
+        clearOldTask();
+      } else {
+        addTask(resp.data);
+        clearTask();
+      }
+    });
   }
 
   function saveOnEnter(event, task) {
     const enterKeyCode = 13;
     if (event.keyCode === enterKeyCode) save(task);
-  }
-
-  function controlInput(task, showInput = false) {
-    axios
-      .put(Constants.baseUrl + "/" + task.id, {
-        title: task.title,
-        isChecked: task.isChecked,
-        showInput: showInput,
-      })
-      .then((resp) => {
-        updateTask(resp.data);
-      });
   }
 
   function remove(task) {
@@ -92,12 +74,7 @@ export default function TaskTable() {
             <Checkbox task={task} />
 
             <TaskTitle
-              value={task.title}
-              showInput={task.showInput}
-              handleChange={(e) => updateTaskTitle(e.target.value)}
-              handleBlur={() => controlInput(task, false)}
-              handleDoubleClick={() => controlInput(task, true)}
-              handleKeyDown={(e) => saveOnEnter(e, task)}
+              task={task}
             />
 
             <TrashButton handleClick={() => remove(task)} />
@@ -115,12 +92,7 @@ export default function TaskTable() {
             <Checkbox task={task} />
 
             <TaskTitle
-              value={task.title}
-              showInput={task.showInput}
-              handleChange={(e) => updateTaskTitle(e.target.value)}
-              handleBlur={() => controlInput(task, false)}
-              handleDoubleClick={() => controlInput(task, true)}
-              handleKeyDown={(e) => saveOnEnter(e, task)}
+              task={task}
               complete
             />
 

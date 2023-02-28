@@ -1,22 +1,74 @@
-import { Context } from "../../context/taskContext";
+import { useContext } from "react";
+import axios from "axios";
 
-function TaskTitle(props) {
+import { Context } from "../../context/taskContext";
+import { baseUrl } from "../../constants";
+
+function TaskTitle({ task, complete }) {
+  const {
+    state,
+    updateTaskTitle,
+    updateTask,
+    clearOldTask,
+    clearTask,
+    addTask,
+  } = useContext(Context);
+
+  function controlInput(task, showInput = false) {
+    axios
+      .put(baseUrl + "/" + task.id, {
+        title: task.title,
+        isChecked: task.isChecked,
+        showInput: showInput,
+      })
+      .then((resp) => {
+        updateTask(resp.data);
+      });
+  }
+
+  function save(taskDB) {
+    const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
+
+    task.isChecked = taskDB.isChecked;
+
+    const method = taskDB.id ? "put" : "post";
+
+    const url = taskDB.id
+      ? `${baseUrl}/${taskDB.id}`
+      : baseUrl;
+
+    axios[method](url, task).then((resp) => {
+      if (taskDB.showInput) {
+        updateTask(resp.data);
+        clearOldTask();
+      } else {
+        addTask(resp.data);
+        clearTask();
+      }
+    });
+  }
+
+  function saveOnEnter(event, task) {
+    const enterKeyCode = 13;
+    if (event.keyCode === enterKeyCode) save(task);
+  }
+
   return (
     <div className="div-title">
-      {props.showInput ? (
+      {task.showInput ? (
         <input
           type="text"
-          defaultValue={props.value}
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          onKeyDownCapture={props.handleKeyDown}
+          defaultValue={task.title}
+          onChange={(e) => updateTaskTitle(e.target.value)}
+          onBlur={() => controlInput(task, false)}
+          onKeyDownCapture={(e) => saveOnEnter(e, task)}
         />
       ) : (
         <span
-          onDoubleClick={props.handleDoubleClick}
-          className={props.complete ? "complete" : ""}
+          onDoubleClick={() => controlInput(task, true)}
+          className={complete ? "complete" : ""}
         >
-          {props.value}
+          {task.title}
         </span>
       )}
     </div>
