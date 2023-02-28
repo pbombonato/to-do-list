@@ -33,6 +33,14 @@ export default function TaskTable() {
     });
   }, [updateTaskList]);
 
+  function createOrUpdateTaskOnDb(task, method) {
+    const url = method === "put"
+      ? `${Constants.baseUrl}/${task.id}`
+      : Constants.baseUrl;
+
+    return axios[method](url, task);
+  }
+
   function save(taskDB) {
     const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
 
@@ -40,19 +48,16 @@ export default function TaskTable() {
 
     const method = taskDB.id ? "put" : "post";
 
-    const url = taskDB.id
-      ? `${Constants.baseUrl}/${taskDB.id}`
-      : Constants.baseUrl;
-
-    axios[method](url, task).then((resp) => {
-      if (taskDB.showInput) {
-        updateTask(resp.data);
-        clearOldTask();
-      } else {
-        addTask(resp.data);
-        clearTask();
-      }
-    });
+    createOrUpdateTaskOnDb(task, method)
+      .then((resp) => {
+        if (taskDB.showInput) {
+          updateTask(resp.data);
+          clearOldTask();
+        } else {
+          addTask(resp.data);
+          clearTask();
+        }
+      });
   }
 
   function saveOnEnter(event, task) {
