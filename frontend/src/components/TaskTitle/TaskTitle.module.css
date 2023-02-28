@@ -1,0 +1,10 @@
+.div-title {
+  grid-area: title;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.complete {
+  color: var(--checkbox-hover-bg-color);
+  text-decoration: line-through;
+}

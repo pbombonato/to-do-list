@@ -1,0 +1,22 @@
+.div-row {
+  background-color: var(--tr-bg-color);
+  width: 100%;
+  border-radius: 9px;
+  margin: 0.6rem 0;
+
+  display: grid;
+  grid-template-columns: 10vw 1fr 10vw;
+  grid-template-rows: 1fr;
+  grid-template-areas: "checkbox title btns";
+  align-items: center;
+
+  padding: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .div-row {
+    grid-template-columns: 5vw 1fr 5vw;
+    grid-template-areas: "checkbox title btns";
+    margin: 1rem 0;
+  }
+}

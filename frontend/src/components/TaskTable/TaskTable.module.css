@@ -1,0 +1,18 @@
+div.div-table {
+  background-color: var(--table-bg-color);
+  border-radius: 12px;
+  width: 100%;
+
+  padding: 0.6rem 1.2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+  div.div-table {
+    padding: 1rem 2rem;
+  }
+}

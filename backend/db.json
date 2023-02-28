@@ -1,32 +1,33 @@
 {
   "tasks": [
     {
-      "title": "Lavar louças",
+      "title": "Wash the dishes",
       "isChecked": true,
-      "id": 7
+      "id": 1
     },
     {
-      "title": "Fazer almoço",
-      "isChecked": true,
-      "id": 8
-    },
-    {
-      "title": "Lavar roupas",
+      "title": "Take the dog for a walk",
       "isChecked": false,
       "showInput": false,
-      "id": 9
+      "id": 2
     },
     {
-      "title": "Ler os e-mails",
+      "title": "Call Mike",
       "isChecked": false,
       "showInput": false,
-      "id": 10
+      "id": 3
     },
     {
-      "title": "Passear com o cachorro",
+      "title": "Buy a new water bottle",
       "isChecked": false,
       "showInput": false,
-      "id": 11
+      "id": 4
+    },
+    {
+      "title": "Talk to Karen",
+      "isChecked": false,
+      "showInput": false,
+      "id": 5
     }
   ]
 }
