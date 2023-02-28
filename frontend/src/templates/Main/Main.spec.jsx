@@ -3,9 +3,11 @@ import Main from '.'
 
 describe('<Header />', () => {
   it('should render its children', () => {
-    render(<Main><h1>Título para teste</h1></Main>)
+    const exampleChildren = () => <h1>example text</h1>
 
-    const h1 = screen.getByText('Título para teste')
+    render(<Main>{exampleChildren()}</Main>)
+
+    const h1 = screen.getByText('example text')
     expect(h1).toBeInTheDocument()
   })
 })
