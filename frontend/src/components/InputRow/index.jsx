@@ -1,4 +1,4 @@
-import './InputRow.module.css'
+import styles from "./InputRow.module.css";
 
 import { useContext } from "react";
 
@@ -14,10 +14,9 @@ export default function InputRow() {
   const { state, updateNewTaskTitle } = useContext(Context);
 
   return (
-    <div className="div-row" id="input-row">
-      <div className="div-title">
+    <div className={styles["div-row"]} id={styles["input-row"]}>
+      <div className={styles["div-title"]}>
         <input
-          className="input-text"
           type="text"
           name="title"
           value={state.task.title}
@@ -28,7 +27,7 @@ export default function InputRow() {
         />
       </div>
 
-      <div className="div-btns">
+      <div className={styles["div-btns"]}>
         <button className="btn" onClick={(e) => save(state.task)}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
