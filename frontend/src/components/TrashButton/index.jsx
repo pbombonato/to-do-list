@@ -1,3 +1,5 @@
+import styles from './TrashButton.module.css'
+
 import {useContext} from "react";
 import axios from "axios";
 
@@ -17,7 +19,7 @@ function TrashButton({ task }) {
   }
 
   return (
-    <div className="div-btns">
+    <div className={styles['div-btns']} >
       <button className="btn" onClick={() => remove(task)}>
         <FontAwesomeIcon icon={faTrash} />
       </button>

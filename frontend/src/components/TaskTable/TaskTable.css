@@ -11,25 +11,7 @@ div.div-table {
   align-items: center;
 }
 
-div.div-row {
-  background-color: var(--tr-bg-color);
-  width: 100%;
-  border-radius: 9px;
-  margin: 0.6rem 0;
-
-  display: grid;
-  grid-template-columns: 10vw 1fr 10vw;
-  grid-template-rows: 1fr;
-  grid-template-areas: "checkbox title btns";
-  align-items: center;
-
-  padding: 10px;
-}
-
-/* Checkbox */
-
 /* Title */
-
 div.div-title {
   grid-area: title;
   overflow: hidden;
@@ -41,35 +23,8 @@ div.div-title {
   text-decoration: line-through;
 }
 
-/* Input title */
-
-/* input[type="text"] {
-  width: 100%;
-  border: none;
-  outline: none;
-} */
-
-/* Buttons */
-
-div.div-btns {
-  grid-area: btns;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-/* Media queries */
-
-/* small screens (<768px) */
 @media only screen and (min-width: 768px) {
   div.div-table {
     padding: 1rem 2rem;
-  }
-
-  div.div-row {
-    grid-template-columns: 5vw 1fr 5vw;
-    grid-template-areas: "checkbox title btns";
-    margin: 1rem 0;
   }
 }
