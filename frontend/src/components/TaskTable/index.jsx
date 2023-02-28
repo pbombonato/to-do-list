@@ -1,4 +1,4 @@
-import "./TaskTable.css";
+import styles from "./TaskTable.module.css";
 
 import { useContext, useEffect } from "react";
 import axios from "axios";
@@ -33,7 +33,7 @@ export default function TaskTable() {
 
   return (
     <Main>
-      <div className="div-table">
+      <div className={styles['div-table']}>
         <InputRow />
         {renderRows()}
         {renderCompleteRows()}
