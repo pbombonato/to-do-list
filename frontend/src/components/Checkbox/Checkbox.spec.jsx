@@ -45,7 +45,6 @@ describe("<Checkbox />", () => {
     );
     const checkbox = screen.getByRole("checkbox");
 
-    // Check that toggleCheck function is called when checkbox is clicked
     fireEvent.click(checkbox);
     expect(axios.put).toHaveBeenCalledTimes(1);
     expect(axios.put).toHaveBeenCalledWith(
@@ -56,7 +55,6 @@ describe("<Checkbox />", () => {
       }
     );
 
-    // Check that checkbox state has been toggled
     const updatedCheckbox = await screen.findByRole("checkbox", {
       checked: true,
     });
