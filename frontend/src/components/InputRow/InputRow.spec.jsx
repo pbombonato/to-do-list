@@ -1,67 +1,45 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import InputRow from ".";
-import { Context } from "../../context/taskContext";
-import useTaskFunctions from "../../hooks/useTaskFunctions";
 
-// jest.mock("../../hooks/useTaskFunctions", () => ({
-//   save: jest.fn(),
-//   saveOnEnter: jest.fn(),
-// }));
+const mockSaveNewTaskToDB = jest.fn();
 
-const mockUpdateNewTaskTitle = jest.fn();
-
-const mockTask = {
-  title: "",
-};
-
-const mockContextValue = {
-  updateNewTaskTitle: mockUpdateNewTaskTitle,
-  state: { task: mockTask },
-};
+// mocking useTaskFunctions Hook
+jest.mock("../../hooks/useTaskFunctions", () => {
+  return () => {
+    return { saveNewTaskToDB: mockSaveNewTaskToDB };
+  };
+});
 
 describe("<InputRow />", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   it("renders the input", () => {
-    render(
-      <Context.Provider value={mockContextValue}>
-        <InputRow />
-      </Context.Provider>
-    );
+    render(<InputRow />);
 
     const input = screen.getByPlaceholderText("New task");
     expect(input).toBeInTheDocument();
   });
 
-  it("updates the task title when the input changes", async () => {
-    render(
-      <Context.Provider value={mockContextValue}>
-        <InputRow />
-      </Context.Provider>
-    );
+  it("updates the task title when the user types", async () => {
+    render(<InputRow />);
 
     const input = screen.getByPlaceholderText("New task");
     const newTitle = "New Title";
 
     await userEvent.type(input, newTitle);
 
-    expect(mockUpdateNewTaskTitle).toHaveBeenCalledTimes(newTitle.length);
+    expect(input).toHaveValue(newTitle);
   });
 
-  // it("calls saveOnEnter when the enter key is pressed", async () => {
-  //   render(
-  //     <Context.Provider value={mockContextValue}>
-  //       <InputRow />
-  //     </Context.Provider>
-  //   );
+  it("calls saveNewTaskToDB and empties the input when the user submits the form", async () => {
+    render(<InputRow />);
 
-  //   const input = screen.getByPlaceholderText("New task");
+    const input = screen.getByPlaceholderText("New task");
+    const newTitle = "New Title";
 
-  //   await userEvent.type(input, "{enter}");
+    await userEvent.type(input, newTitle);
+    await userEvent.click(screen.getByRole("button"));
 
-  //   expect(useTaskFunctions().saveOnEnter).toHaveBeenCalledTimes(1);
-  // });
+    expect(input).toHaveValue("");
+    expect(mockSaveNewTaskToDB).toHaveBeenCalledWith(newTitle);
+  });
 });
