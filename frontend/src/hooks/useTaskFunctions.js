@@ -4,8 +4,19 @@ import { baseUrl } from "../constants";
 import { Context } from "../context/taskContext";
 
 function useTaskFunctions() {
-  const { state, addTask, updateTask, clearTask, clearOldTask } =
+  const { state, addTaskToContextList, updateTask, clearTask, clearOldTask } =
     useContext(Context);
+
+  function saveNewTaskToDB(NewTaskTitle) {
+    const newTask = {
+      title: NewTaskTitle,
+      isChecked: false,
+    };
+
+    axios.post(baseUrl, newTask).then((resp) => {
+      addTaskToContextList(resp.data);
+    });
+  }
 
   function save(taskDB) {
     const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
@@ -21,7 +32,7 @@ function useTaskFunctions() {
         updateTask(resp.data);
         clearOldTask();
       } else {
-        addTask(resp.data);
+        addTaskToContextList(resp.data);
         clearTask();
       }
     });
@@ -32,7 +43,7 @@ function useTaskFunctions() {
     if (event.keyCode === enterKeyCode) save(task);
   }
 
-  return { save, saveOnEnter };
+  return { save, saveOnEnter, saveNewTaskToDB };
 }
 
 export default useTaskFunctions;

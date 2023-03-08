@@ -8,7 +8,7 @@ export const Context = createContext();
 export const TaskContext = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function addTask(payload) {
+  function addTaskToContextList(payload) {
     dispatch({ type: actions.ADD_TASK, payload });
   }
 
@@ -47,7 +47,7 @@ export const TaskContext = ({ children }) => {
     <Context.Provider
       value={{
         state,
-        addTask,
+        addTaskToContextList,
         updateTask,
         removeTask,
         clearTask,
