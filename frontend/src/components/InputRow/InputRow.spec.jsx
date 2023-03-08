@@ -30,7 +30,19 @@ describe("<InputRow />", () => {
     expect(input).toHaveValue(newTitle);
   });
 
-  it("calls saveNewTaskToDB and empties the input when the user submits the form", async () => {
+  it("calls saveNewTaskToDB when the user submits the form", async () => {
+    render(<InputRow />);
+
+    const input = screen.getByPlaceholderText("New task");
+    const newTitle = "New Title";
+
+    await userEvent.type(input, newTitle);
+    await userEvent.click(screen.getByRole("button"));
+
+    expect(mockSaveNewTaskToDB).toHaveBeenCalledWith(newTitle);
+  });
+
+  it("empties the input when the user submits the form", async () => {
     render(<InputRow />);
 
     const input = screen.getByPlaceholderText("New task");
@@ -40,6 +52,5 @@ describe("<InputRow />", () => {
     await userEvent.click(screen.getByRole("button"));
 
     expect(input).toHaveValue("");
-    expect(mockSaveNewTaskToDB).toHaveBeenCalledWith(newTitle);
   });
 });
