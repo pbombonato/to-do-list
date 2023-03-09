@@ -6,7 +6,7 @@ import { baseUrl } from "../../constants";
 import { Context } from "../../context/taskContext";
 
 function Checkbox({ task }) {
-  const { updateTask } = useContext(Context);
+  const { updateTaskFromContext } = useContext(Context);
 
   function toggleCheck(task) {
     axios
@@ -15,7 +15,7 @@ function Checkbox({ task }) {
         isChecked: !task.isChecked,
       })
       .then((resp) => {
-        updateTask(resp.data);
+        updateTaskFromContext(resp.data);
       });
   }
 
@@ -23,7 +23,7 @@ function Checkbox({ task }) {
     <div className={styles["div-checkbox"]}>
       <input
         type="checkbox"
-        name={'checkbox-'+task.id}
+        name={"checkbox-" + task.id}
         id={`checkbox-${task.id}`}
         defaultChecked={task.isChecked}
         onChange={() => toggleCheck(task)}

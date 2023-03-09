@@ -20,18 +20,6 @@ export const TaskContext = ({ children }) => {
     dispatch({ type: actions.REMOVE_TASK, payload });
   }
 
-  function clearTask() {
-    dispatch({ type: actions.CLEAR_TASK });
-  }
-
-  function clearOldTask() {
-    dispatch({ type: actions.CLEAR_OLD_TASK });
-  }
-
-  function updateTaskTitle(payload) {
-    dispatch({ type: actions.UPDATE_TASK_TITLE, payload });
-  }
-
   const updateTaskList = useCallback(
     (payload) => {
       dispatch({ type: "UPDATE_TASK_LIST", payload });
@@ -46,9 +34,6 @@ export const TaskContext = ({ children }) => {
         addTaskToContext,
         updateTaskFromContext,
         removeTaskFromContext,
-        clearTask,
-        clearOldTask,
-        updateTaskTitle,
         updateTaskList,
       }}
     >

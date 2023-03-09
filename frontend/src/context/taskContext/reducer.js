@@ -1,6 +1,3 @@
-// import { actions } from "./actions";
-import { initialState } from "./data";
-
 export const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
@@ -20,22 +17,8 @@ export const reducer = (state, action) => {
         list: state.list.filter((task) => task.id !== action.payload.id),
       };
 
-
-
-    case "CLEAR_TASK": {
-      return { ...state, task: initialState.task };
-    }
-    case "CLEAR_OLD_TASK": {
-      return { ...state, oldTask: initialState.oldTask };
-    }
-    case "UPDATE_NEW_TASK_TITLE": {
-      return { ...state, task: { ...state.task, title: action.payload } };
-    }
-    case "UPDATE_TASK_TITLE": {
-      return { ...state, oldTask: { ...state.oldTask, title: action.payload } };
-    }
     case "UPDATE_TASK_LIST": {
-      return { ...state, list: action.payload }
+      return { ...state, list: action.payload };
     }
     default:
       return state;

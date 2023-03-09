@@ -4,13 +4,7 @@ import { baseUrl } from "../constants";
 import { Context } from "../context/taskContext";
 
 function useTaskFunctions() {
-  const {
-    state,
-    addTaskToContext,
-    updateTaskFromContext,
-    clearTask,
-    clearOldTask,
-  } = useContext(Context);
+  const { addTaskToContext } = useContext(Context);
 
   function saveNewTaskToDB(NewTaskTitle) {
     const newTask = {
@@ -23,32 +17,7 @@ function useTaskFunctions() {
     });
   }
 
-  function save(taskDB) {
-    const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
-
-    task.isChecked = taskDB.isChecked;
-
-    const method = taskDB.id ? "put" : "post";
-
-    const url = taskDB.id ? `${baseUrl}/${taskDB.id}` : baseUrl;
-
-    axios[method](url, task).then((resp) => {
-      if (taskDB.showInput) {
-        updateTaskFromContext(resp.data);
-        clearOldTask();
-      } else {
-        addTaskToContext(resp.data);
-        clearTask();
-      }
-    });
-  }
-
-  function saveOnEnter(event, task) {
-    const enterKeyCode = 13;
-    if (event.keyCode === enterKeyCode) save(task);
-  }
-
-  return { save, saveOnEnter, saveNewTaskToDB };
+  return { saveNewTaskToDB };
 }
 
 export default useTaskFunctions;
