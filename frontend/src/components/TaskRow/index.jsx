@@ -6,7 +6,7 @@ import TrashButton from "../TrashButton";
 
 function TaskRow({ task }) {
   return (
-    <div className={style["div-row"]}>
+    <div role="listitem" className={style["div-row"]}>
       <Checkbox task={task} />
       <TaskTitle task={task} />
       <TrashButton task={task} />
