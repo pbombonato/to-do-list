@@ -8,15 +8,15 @@ export const Context = createContext();
 export const TaskContext = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function addTaskToContextList(payload) {
+  function addTaskToContext(payload) {
     dispatch({ type: actions.ADD_TASK, payload });
   }
 
-  function updateTask(payload) {
+  function updateTaskFromContext(payload) {
     dispatch({ type: actions.UPDATE_TASK, payload });
   }
 
-  function removeTask(payload) {
+  function removeTaskFromContext(payload) {
     dispatch({ type: actions.REMOVE_TASK, payload });
   }
 
@@ -26,10 +26,6 @@ export const TaskContext = ({ children }) => {
 
   function clearOldTask() {
     dispatch({ type: actions.CLEAR_OLD_TASK });
-  }
-
-  function updateNewTaskTitle(payload) {
-    dispatch({ type: actions.UPDATE_NEW_TASK_TITLE, payload });
   }
 
   function updateTaskTitle(payload) {
@@ -47,12 +43,11 @@ export const TaskContext = ({ children }) => {
     <Context.Provider
       value={{
         state,
-        addTaskToContextList,
-        updateTask,
-        removeTask,
+        addTaskToContext,
+        updateTaskFromContext,
+        removeTaskFromContext,
         clearTask,
         clearOldTask,
-        updateNewTaskTitle,
         updateTaskTitle,
         updateTaskList,
       }}
