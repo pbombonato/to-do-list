@@ -14,7 +14,7 @@ const mockTask = {
 const mockRemoveTask = jest.fn();
 
 const mockContext = {
-  removeTask: mockRemoveTask,
+  removeTaskFromContext: mockRemoveTask,
 };
 
 jest.mock("axios");
