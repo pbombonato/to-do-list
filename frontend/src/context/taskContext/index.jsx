@@ -1,12 +1,12 @@
 import { createContext, useCallback, useReducer } from "react";
-import { initialState } from "./data";
+import { initialTaskList } from "./data";
 import { reducer } from "./reducer";
 import { actions } from "./actions";
 
 export const Context = createContext();
 
 export const TaskContext = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [contextTaskList, dispatch] = useReducer(reducer, initialTaskList);
 
   function addTaskToContext(payload) {
     dispatch({ type: actions.ADD_TASK, payload });
@@ -22,7 +22,7 @@ export const TaskContext = ({ children }) => {
 
   const updateTaskList = useCallback(
     (payload) => {
-      dispatch({ type: "UPDATE_TASK_LIST", payload });
+      dispatch({ type: actions.UPDATE_TASK_LIST, payload });
     },
     [dispatch]
   );
@@ -30,7 +30,7 @@ export const TaskContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        state,
+        contextTaskList,
         addTaskToContext,
         updateTaskFromContext,
         removeTaskFromContext,

@@ -1,3 +1,1 @@
-export const initialState = {
-  list: [],
-};
+export const initialTaskList = []

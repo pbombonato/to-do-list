@@ -1,24 +1,18 @@
 export const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
-      return { ...state, list: [action.payload, ...state.list] };
+      return [action.payload, ...state];
 
     case "UPDATE_TASK":
-      return {
-        ...state,
-        list: state.list.map((task) =>
-          task.id === action.payload.id ? action.payload : task
-        ),
-      };
+      return state.map((task) =>
+        task.id === action.payload.id ? action.payload : task
+      );
 
     case "REMOVE_TASK":
-      return {
-        ...state,
-        list: state.list.filter((task) => task.id !== action.payload.id),
-      };
+      return state.filter((task) => task.id !== action.payload.id);
 
     case "UPDATE_TASK_LIST": {
-      return { ...state, list: action.payload };
+      return action.payload
     }
     default:
       return state;

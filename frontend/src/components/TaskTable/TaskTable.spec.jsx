@@ -14,9 +14,7 @@ const mockTask = {
 const mockUpdateTaskList = jest.fn();
 
 const mockContext = {
-  state: {
-    list: [mockTask],
-  },
+  contextTaskList: [mockTask],
   updateTaskList: mockUpdateTaskList,
 };
 

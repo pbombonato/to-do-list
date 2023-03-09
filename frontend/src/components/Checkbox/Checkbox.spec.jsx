@@ -15,7 +15,7 @@ const mockTask = {
 };
 
 const mockContextValue = {
-  updateTask: mockUpdateTask,
+  updateTaskFromContext: mockUpdateTask,
 };
 
 describe("<Checkbox />", () => {
@@ -47,13 +47,10 @@ describe("<Checkbox />", () => {
 
     fireEvent.click(checkbox);
     expect(axios.put).toHaveBeenCalledTimes(1);
-    expect(axios.put).toHaveBeenCalledWith(
-      baseUrl + "/" + mockTask.id,
-      {
-        title: mockTask.title,
-        isChecked: true,
-      }
-    );
+    expect(axios.put).toHaveBeenCalledWith(baseUrl + "/" + mockTask.id, {
+      title: mockTask.title,
+      isChecked: true,
+    });
 
     const updatedCheckbox = await screen.findByRole("checkbox", {
       checked: true,

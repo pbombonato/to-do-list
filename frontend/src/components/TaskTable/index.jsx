@@ -12,7 +12,7 @@ import InputRow from "../InputRow";
 
 export default function TaskTable() {
   const {
-    state: { list },
+    contextTaskList,
     updateTaskList,
   } = useContext(Context);
 
@@ -23,13 +23,13 @@ export default function TaskTable() {
   }, [updateTaskList]);
 
   function renderRows() {
-    return list
+    return contextTaskList
       .filter((task) => !task.isChecked)
       .map((task) => <TaskRow task={task} key={task.id} />);
   }
 
   function renderCompleteRows() {
-    return list
+    return contextTaskList
       .filter((task) => task.isChecked)
       .map((task) => <TaskRow task={task} key={task.id} />);
   }
