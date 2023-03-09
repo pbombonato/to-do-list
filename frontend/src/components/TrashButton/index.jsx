@@ -10,7 +10,7 @@ import { Context } from "../../context/taskContext";
 import { baseUrl } from "../../constants";
 
 function TrashButton({ task }) {
-  const { removeTask: removeTaskFromContext } = useContext(Context);
+  const { removeTaskFromContext } = useContext(Context);
 
   function removeTaskFromDB(task) {
     axios.delete(`${baseUrl}/${task.id}`).then(() => {
