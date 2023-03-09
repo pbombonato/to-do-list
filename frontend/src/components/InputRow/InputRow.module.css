@@ -24,7 +24,7 @@ input {
 }
 
 .div-title {
-  margin-left: 1rem;
+  margin-left: 2rem;
   grid-area: title;
   overflow: hidden;
   overflow-wrap: break-word;
