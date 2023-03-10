@@ -12,7 +12,7 @@ Esse é o primeiro projeto que fiz sozinho usando React. Tenho aplicado novas te
   - Mock de useContext
   - Query by accessible roles (boas práticas)
 
-- Axios
+- Consumo de API com Axios
 - Bootstrap
 - Create-React-App (Webpack)
 - ESLint e Prettier
