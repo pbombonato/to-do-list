@@ -19,9 +19,3 @@ Esse é o primeiro projeto que fiz sozinho usando React. Tenho aplicado novas te
 - CSS Modules
 - FontAwesome
 - JSON Server para construir um backend simplificado para o projeto.
-
-<br><hr><br>
-
-## Visualize o resultado atual no PC:
-
-![Demonstração do resultado do site para PC](gifs/resultado-pc.gif)
