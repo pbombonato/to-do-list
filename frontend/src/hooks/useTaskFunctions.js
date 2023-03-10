@@ -4,35 +4,20 @@ import { baseUrl } from "../constants";
 import { Context } from "../context/taskContext";
 
 function useTaskFunctions() {
-  const { state, addTask, updateTask, clearTask, clearOldTask } =
-    useContext(Context);
+  const { addTaskToContext } = useContext(Context);
 
-  function save(taskDB) {
-    const task = taskDB.showInput ? { ...state.oldTask } : { ...state.task };
+  function saveNewTaskToDB(NewTaskTitle) {
+    const newTask = {
+      title: NewTaskTitle,
+      isChecked: false,
+    };
 
-    task.isChecked = taskDB.isChecked;
-
-    const method = taskDB.id ? "put" : "post";
-
-    const url = taskDB.id ? `${baseUrl}/${taskDB.id}` : baseUrl;
-
-    axios[method](url, task).then((resp) => {
-      if (taskDB.showInput) {
-        updateTask(resp.data);
-        clearOldTask();
-      } else {
-        addTask(resp.data);
-        clearTask();
-      }
+    axios.post(baseUrl, newTask).then((resp) => {
+      addTaskToContext(resp.data);
     });
   }
 
-  function saveOnEnter(event, task) {
-    const enterKeyCode = 13;
-    if (event.keyCode === enterKeyCode) save(task);
-  }
-
-  return { save, saveOnEnter };
+  return { saveNewTaskToDB };
 }
 
 export default useTaskFunctions;

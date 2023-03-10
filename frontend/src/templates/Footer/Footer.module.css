@@ -1,11 +1,17 @@
-footer {
+.footer {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 10px;
+  padding-bottom: 1.5rem;
 }
 
-footer > span {
+.footer > span {
   color: var(--footer-color);
   user-select: none;
+}
+
+.footer a {
+  color: var(--footer-color);
+  text-decoration: none;
+  margin-left: 0.5rem;
 }

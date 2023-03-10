@@ -11,7 +11,10 @@ import TaskRow from "../TaskRow";
 import InputRow from "../InputRow";
 
 export default function TaskTable() {
-  const { state, updateTaskList } = useContext(Context);
+  const {
+    contextTaskList,
+    updateTaskList,
+  } = useContext(Context);
 
   useEffect(() => {
     axios(baseUrl).then((resp) => {
@@ -20,20 +23,20 @@ export default function TaskTable() {
   }, [updateTaskList]);
 
   function renderRows() {
-    return state.list
+    return contextTaskList
       .filter((task) => !task.isChecked)
       .map((task) => <TaskRow task={task} key={task.id} />);
   }
 
   function renderCompleteRows() {
-    return state.list
+    return contextTaskList
       .filter((task) => task.isChecked)
       .map((task) => <TaskRow task={task} key={task.id} />);
   }
 
   return (
     <Main>
-      <div className={styles['div-table']}>
+      <div role="list" className={styles["div-table"]}>
         <InputRow />
         {renderRows()}
         {renderCompleteRows()}
