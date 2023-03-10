@@ -1,30 +1,38 @@
 #input-form {
   display: grid;
-  padding: 10px;
+  padding: 1vw 1vw;
   grid-template-areas: "title btns";
-  grid-template-columns: 1fr 5vw;
+  grid-template-columns: 1fr 2.5vw;
   grid-template-rows: 1fr;
 
   background-color: var(--tr-bg-color);
 
+  min-height: 12vh;
   width: 100%;
   border-radius: 9px;
-  align-items: center;
+  align-items: flex-start;
   margin: 1rem 0;
 }
 
-input::placeholder {
-  color: var(--checkbox-hover-bg-color);
+textarea::placeholder {
+  color: var(--accent-color);
 }
 
-input {
+textarea {
   width: 100%;
   border: none;
   outline: none;
+
+  resize: none;
+
+  height: 100%;
+  text-justify: flex-start;
+
+  color: var(--text-color);
 }
 
-.div-title {
-  margin-left: 2rem;
+.container-textarea {
+  height: 100%;
   grid-area: title;
   overflow: hidden;
   overflow-wrap: break-word;

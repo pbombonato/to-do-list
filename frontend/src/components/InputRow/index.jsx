@@ -22,23 +22,35 @@ export default function InputRow() {
     taskTitleRef.current.value = "";
   }
 
+  function handleEnterPress(event) {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
+
+
   return (
     <form onSubmit={handleSubmit} id={styles["input-form"]}>
-      <div className={styles["div-title"]}>
-        <input
+      <div className={styles["container-textarea"]}>
+        <textarea
           type="text"
           name="title"
           ref={taskTitleRef}
           aria-label="Insert new task"
           placeholder="New task"
           autoComplete="off"
+          spellCheck="false"
+          onKeyDown={handleEnterPress}
           autoFocus
-        />
+        ></textarea>
       </div>
 
       <div className={styles["div-btns"]}>
         <button type="submit" className="btn" aria-label="Submit task">
-          <FontAwesomeIcon icon={faPlus} />
+          <FontAwesomeIcon
+            icon={faPlus}
+            style={{ color: "var(--icons-color)" }}
+          />
         </button>
       </div>
     </form>

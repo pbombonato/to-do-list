@@ -1,18 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
 
+
 :root {
   --header-height: 20vh;
-  --footer-height: 5vh;
+  --footer-height: 12vh;
 
-  --header-color: #71738c;
-  --footer-color: var(--header-color);
-  --bg-color: ##f8f8ff;
-  --table-bg-color: #ecedf6;
-  --tr-bg-color: #fff;
-  --checkbox-hover-bg-color: #d1d3e0;
-  --checkbox-checked-hover-color: #8b94f4;
-  --checkbox-checked-bg-color: #646ff0;
+  --primary-color: #ffffff;
+  --secondary-color: #d9d9d9;
+  --accent-color: #284b63;
+  --text-color: #353535;
+
+  --primary-color-rgb: 255, 255, 255;
+  --secondary-color-rgb: 217, 217, 217;
+  --accent-color-rgb: 40, 75, 99;
+
+  --header-color: var(--accent-color);
+  --footer-color: var(--accent-color);
+  --bg-color: var(--primary-color);
+  --table-bg-color: var(--secondary-color);
+  --tr-bg-color: var(--primary-color);
+  --checkbox-hover-bg-color: rgba(var(--secondary-color-rgb), 0.5);
+  --checkbox-checked-hover-color: rgba(var(--accent-color-rgb), 0.5);
+  --checkbox-checked-bg-color: var(--accent-color);
   --checkbox-checkmark-color: #fff;
+  --icons-color: var(--accent-color);
 }
 
 * {
@@ -28,7 +39,7 @@
   overflow-y: visible;
   overflow-x: hidden;
 
-  background-color: var(--bg-color);
+  background: var(--bg-color);
 
   display: grid;
   grid-template-columns: 1fr;

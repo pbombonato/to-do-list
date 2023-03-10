@@ -25,7 +25,7 @@ function TrashButton({ task }) {
         className="btn"
         onClick={() => removeTaskFromDB(task)}
       >
-        <FontAwesomeIcon icon={faTrash} />
+        <FontAwesomeIcon icon={faTrash} style={{ color: 'var(--icons-color)'}} />
       </button>
     </div>
   );
