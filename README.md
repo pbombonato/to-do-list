@@ -7,9 +7,10 @@ Esse é o primeiro projeto que fiz sozinho usando React. Tenho aplicado novas te
   - React Hooks (useCallback, useMemo, useState, useEffect, useContext, useRef...)
   - Hooks personalizados
   
-- Testes automatizados com <b>Jest, Testing Library e Jest-Dom</b>
+- Testes unitários com <b>Jest, Testing Library e Jest-Dom</b>
   - Mock de requisição Axios
   - Mock de useContext
+  - Query by accessible roles (boas práticas)
 
 - Axios
 - Bootstrap
@@ -18,6 +19,8 @@ Esse é o primeiro projeto que fiz sozinho usando React. Tenho aplicado novas te
 - CSS Modules
 - FontAwesome
 - JSON Server para construir um backend simplificado para o projeto.
+
+<br><hr><br>
 
 ## Visualize o resultado atual no PC:
 
