@@ -1,4 +1,4 @@
-# React to-do-list
+# React to-do list
 
 Esse é o primeiro projeto que fiz sozinho usando React. Tenho aplicado novas tecnologias e recursos ao projeto conforme os estudo. O app possibilita visualizar, incluir, deletar e alterar tarefas (CRUD). Veja algumas tecnologias que já apliquei:
 
