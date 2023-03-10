@@ -1,6 +1,6 @@
 #input-form {
   display: grid;
-  padding: 1vw 1vw;
+  padding: 1vw;
   grid-template-areas: "title btns";
   grid-template-columns: 1fr 2.5vw;
   grid-template-rows: 1fr;
@@ -50,5 +50,6 @@ textarea {
   #input-form {
     grid-template-columns: 1fr 10vw;
     margin: 0.6rem 0;
+    padding: 2vw 3vw;
   }
 }
